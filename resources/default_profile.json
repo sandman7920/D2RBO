@@ -1,0 +1,28 @@
+{
+  "currentIndex": 0,
+  "profiles": [
+    {
+      "name": "Default",
+      "skills": [
+        {
+          "name": "Battle Orders",
+          "enabled": true,
+          "duration": 130,
+          "hotkey": 117
+        },
+        {
+          "name": "Battle Command",
+          "enabled": true,
+          "duration": 130,
+          "hotkey": 118
+        },
+        {
+          "name": "Shout",
+          "enabled": true,
+          "duration": 130,
+          "hotkey": 119
+        }
+      ]
+    }
+  ]
+}
