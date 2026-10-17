@@ -105,20 +105,3 @@ void SkillWidget::on_btnDel_clicked() {
     delete item;
     emit changed();
 }
-
-ProfileItem SkillWidget::profileItem() {
-    bool ok;
-    const auto ttl = ui->lineDuration->text().toUInt(&ok);
-    const auto idx = ui->comboSkill->currentIndex();
-    const auto idxHotKey = ui->comboHotKey->currentIndex();
-    if (!ok || idx < 0 || idxHotKey || !ui->checkEnabled->isChecked()) {
-        return {};
-    }
-
-    ProfileItem item;
-    item.time_to_live = ttl;
-    const auto &img = Assets::the().images().at(idx);
-    item.name = img.name;
-    item.image = &img.image;
-    return item;
-}

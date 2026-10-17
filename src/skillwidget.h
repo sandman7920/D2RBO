@@ -18,7 +18,6 @@ public:
     ~SkillWidget();
     friend void from_json(const nlohmann::json &, SkillWidget *);
     friend void to_json(nlohmann::json &, SkillWidget const *const);
-    ProfileItem profileItem();
 
 signals:
     void changed();
