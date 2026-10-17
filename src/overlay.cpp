@@ -163,7 +163,7 @@ void Overlay::paintEvent(QPaintEvent * /*event*/) {
             const auto p = delta / item.time_to_live;
             size.rwidth() *= p;
             if (p >= .666) {
-                painter.setBrush(Qt::green);
+                painter.setBrush(QColor::fromRgb(0x00, 0x8e, 0x00));
             } else if (p >= .333) {
                 painter.setBrush(Qt::yellow);
             } else {
