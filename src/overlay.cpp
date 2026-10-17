@@ -187,13 +187,11 @@ void Overlay::paintEvent(QPaintEvent * /*event*/) {
 void Overlay::setProgressBar(int size) {
     m_progress = size;
     calculateLayout(m_direction);
-    update();
 }
 
 void Overlay::setSize(int size) {
     m_size = size;
     calculateLayout(m_direction);
-    update();
 }
 
 void Overlay::setWarning(int value) {
@@ -204,7 +202,6 @@ void Overlay::setWarning(int value) {
 void Overlay::setSpace(int value) {
     m_space = value;
     calculateLayout(m_direction);
-    update();
 }
 
 void Overlay::calculateLayout(OverlayDirection direction) {
