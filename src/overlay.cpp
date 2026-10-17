@@ -156,9 +156,7 @@ void Overlay::paintEvent(QPaintEvent * /*event*/) {
         top_left.ry() += m_size;
         size.rheight() = m_progress;
 
-        painter.setBrush(Qt::NoBrush);
-        painter.setPen({Qt::white, .5});
-        painter.drawRect({top_left, size});
+        const auto rectBorder = QRectF{top_left, size};
 
         if (delta > 0) {
             painter.setPen(Qt::NoPen);
@@ -173,6 +171,10 @@ void Overlay::paintEvent(QPaintEvent * /*event*/) {
             }
             painter.drawRect({top_left, size});
         }
+
+        painter.setBrush(Qt::NoBrush);
+        painter.setPen({Qt::white, .5});
+        painter.drawRect(rectBorder);
     }
 
     if (m_preview) {
