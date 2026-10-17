@@ -2,6 +2,11 @@
 
 > A lightweight, always-on-top buff timer overlay for **Diablo II: Resurrected**, built with C++ and Qt.
 
+## 📥 Download
+Visit  [releases](https://github.com/sandman7920/D2RBO/releases) and download a pre-built Windows x64 executable **`D2RBO-<version>-win64.zip`** .
+Extract and run `D2RBO.exe`.
+No installation or additional dependencies required.
+
 ## Screenshots
 
 | In-game overlay | Application UI |
