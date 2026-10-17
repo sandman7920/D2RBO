@@ -63,7 +63,6 @@ SkillWidget::SkillWidget(QWidget *parent) : QWidget(parent), ui(new Ui::SkillWid
     connect(ui->comboSkill, &QComboBox::currentIndexChanged, this, &SkillWidget::changed);
     connect(ui->comboHotKey, &QComboBox::currentIndexChanged, this, &SkillWidget::changed);
     connect(ui->lineDuration, &QLineEdit::textChanged, this, &SkillWidget::changed);
-    // QMetaObject::invokeMethod(this, [this] { emit changed(); }, Qt::QueuedConnection);
 }
 
 using json = nlohmann::json;
