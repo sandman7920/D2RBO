@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.27)
-project(D2RBO LANGUAGES CXX VERSION 1.0.0)
+project(D2RBO LANGUAGES CXX VERSION 1.0.1)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
 
@@ -80,4 +80,5 @@ qt6_generate_deploy_script(
 
 install(SCRIPT ${deploy_script})
 set(CPACK_GENERATOR "ZIP")
+set(CPACK_PACKAGE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/dist")
 include(CPack)
