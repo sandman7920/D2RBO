@@ -45,7 +45,7 @@ void Overlay::start() {
     setPreview(false);
     if (m_profile != nullptr) {
         for (auto &item : m_profile->items) {
-            item.expiry_at = 0;
+            item.expiry_at = Clock::time_point{};
         }
     }
     m_visible = true;
@@ -62,7 +62,7 @@ void Overlay::stop() {
 void Overlay::setPreview(bool enabled) {
     if (m_profile) {
         for (auto &item : m_profile->items) {
-            item.expiry_at = QDateTime::currentMSecsSinceEpoch() + 24 * 3600 * 10'000;
+            item.expiry_at = Clock::now() + Chrono::hours(24 * 10);
         }
     }
     m_preview = enabled;
@@ -110,7 +110,6 @@ void Overlay::paintEvent(QPaintEvent * /*event*/) {
     if (!m_visible || m_profile == nullptr) {
         return;
     }
-    const double now = QDateTime::currentMSecsSinceEpoch();
     const auto &items = m_profile->items;
     int cnt = items.size();
     m_clip = {
@@ -136,13 +135,13 @@ void Overlay::paintEvent(QPaintEvent * /*event*/) {
         painter.setPen(Qt::NoPen);
         painter.setOpacity(m_opacity);
         auto &item = items.at(i);
-        const auto delta = item.expiry_at - now;
+        const auto delta = item.expiry_at - Clock::now();
 
-        if (delta <= 0) {
+        if (delta <= Clock::duration(0)) {
             painter.setOpacity(0.50);
         }
         painter.drawPixmap({top_left.toPoint(), size.toSize()}, *item.image);
-        if (m_warning > 0 && delta > 0 && delta <= m_warning) {
+        if (m_warning > Clock::duration(0) && delta > Clock::duration(0) && delta <= m_warning) {
             painter.setOpacity(0.4);
             painter.setBrush(Qt::red);
             painter.drawRect({top_left, size});
@@ -158,9 +157,9 @@ void Overlay::paintEvent(QPaintEvent * /*event*/) {
 
         const auto rectBorder = QRectF{top_left, size};
 
-        if (delta > 0) {
+        if (delta > Clock::duration(0)) {
             painter.setPen(Qt::NoPen);
-            const auto p = delta / item.time_to_live;
+            const auto p = double(delta.count()) / item.time_to_live.count();
             size.rwidth() *= p;
             if (p >= .666) {
                 painter.setBrush(QColor::fromRgb(0x00, 0x8e, 0x00));
@@ -197,7 +196,7 @@ void Overlay::setSize(int size) {
 }
 
 void Overlay::setWarning(int value) {
-    m_warning = value * 1'000;
+    m_warning = Chrono::seconds(value);
     update();
 }
 

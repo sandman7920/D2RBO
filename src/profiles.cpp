@@ -87,11 +87,11 @@ void Profiles::refreshDrawProfile() {
         for (const auto &skill : profile["skills"]) {
             if (skill.value("enabled", false)) {
                 ProfileItem item;
-                item.time_to_live = skill.value("duration", 0) * 1000;
+                item.time_to_live = Chrono::seconds(skill.value("duration", 0));
                 item.hotkey = skill.value("hotkey", 0);
                 item.name = QString::fromStdString(skill.value("name", ""));
                 item.image = Assets::the().getImageByName(item.name);
-                item.expiry_at = 0;
+                item.expiry_at = Clock::time_point{};
                 m_profile.items.emplace_back(item);
             }
         }

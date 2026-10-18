@@ -62,7 +62,7 @@ private:
     double m_space{6};
     double m_progress{3};
     double m_opacity{0.90};
-    double m_warning{10 * 1'000};
+    Clock::duration m_warning{Chrono::seconds(10)};
     bool m_visible{false};
     bool m_preview{false};
 };

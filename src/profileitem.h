@@ -1,18 +1,21 @@
 #ifndef PROFILEITEM_H
 #define PROFILEITEM_H
 
-#include <QDateTime>
 #include <QPixmap>
+#include <chrono>
+
+namespace Chrono = std::chrono;
+using Clock = Chrono::steady_clock;
 
 struct ProfileItem {
     void refresh() {
-        expiry_at = QDateTime::currentMSecsSinceEpoch() + time_to_live;
+        expiry_at = Clock::now() + time_to_live;
     }
 
     QString name;
     QPixmap const *image;
-    double time_to_live{0};
-    double expiry_at{0};
+    Clock::duration time_to_live{0};
+    Clock::time_point expiry_at{};
     int hotkey{0};
 };
 
